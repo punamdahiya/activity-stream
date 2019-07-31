@@ -8,6 +8,7 @@ import { DSLinkMenu } from "../DSLinkMenu/DSLinkMenu";
 import { ImpressionStats } from "../../DiscoveryStreamImpressionStats/ImpressionStats";
 import React from "react";
 import { SafeAnchor } from "../SafeAnchor/SafeAnchor";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 export class DSCard extends React.PureComponent {
   constructor(props) {
