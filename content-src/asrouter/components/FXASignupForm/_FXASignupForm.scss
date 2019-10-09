@@ -38,26 +38,11 @@
   }
 
   .fxa-signin {
-    font-size: 16px;
     margin-top: 19px;
 
-    span {
-      margin-inline-end: 5px;
-    }
-
-    button {
-      background-color: initial;
-      text-decoration: underline;
+    a {
+      cursor: pointer;
       color: $white;
-      display: inline;
-      padding: 0;
-      width: auto;
-
-      &:hover,
-      &:focus,
-      &:active {
-        background-color: initial;
-      }
     }
   }
 

@@ -110,7 +110,7 @@ add_task(async function test_trailhead_branches() {
       ".trailheadCard",
       "p[data-l10n-id=onboarding-benefit-products-text]",
       "button[data-l10n-id=onboarding-join-form-continue]",
-      "button[data-l10n-id=onboarding-join-form-signin]",
+      "p[data-l10n-id=onboarding-join-form-signin]",
     ]
   );
 

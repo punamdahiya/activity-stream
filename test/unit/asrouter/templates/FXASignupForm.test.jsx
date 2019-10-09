@@ -106,9 +106,7 @@ describe("<FXASignupForm>", () => {
 
   it("should emit UserEvent SUBMIT_SIGNIN when signin is clicked", () => {
     wrapper.setProps({ showSignInLink: true });
-    wrapper
-      .find("button[data-l10n-id='onboarding-join-form-signin']")
-      .simulate("click");
+    wrapper.find("a#signin").simulate("click");
 
     assert.calledOnce(dispatch);
     assert.isUserEventAction(dispatch.firstCall.args[0]);

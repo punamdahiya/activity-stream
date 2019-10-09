@@ -54,16 +54,28 @@ export class FXASignupForm extends React.PureComponent {
   }
 
   handleSignIn(event) {
-    if (event.target.value === "signin") {
-      this.setState({ isSignIn: true });
-      this.email.required = false;
-      this.email.disabled = true;
+    event.preventDefault();
+    // Check event target element is signin link
+    if (event.target.id !== "signin") {
+      return;
     }
+
+    // Check if there is key pressed on signin link and continue
+    // only if "Enter" is pressed
+    if (event.key && event.key !== "Enter") {
+      return;
+    }
+
+    this.setState({ isSignIn: true });
+    this.email.required = false;
+    this.email.disabled = true;
+
     // Report to telemetry additional information about the form submission.
     const value = { has_flow_params: !!this.props.flowParams.flowId.length };
     this.props.dispatch(ac.UserEvent({ event: "SUBMIT_SIGNIN", value }));
 
     global.addEventListener("visibilitychange", this.props.onClose);
+    this.refs.form.submit();
   }
 
   componentDidMount() {
@@ -106,6 +118,7 @@ export class FXASignupForm extends React.PureComponent {
           action={isSignIn ? this.signInURL : this.props.fxaEndpoint}
           target="_blank"
           rel="noopener noreferrer"
+          ref="form"
           onSubmit={this.onSubmit}
         >
           <input name="service" type="hidden" value="sync" />
@@ -168,15 +181,20 @@ export class FXASignupForm extends React.PureComponent {
           </p>
           <button data-l10n-id={content.form.button.string_id} type="submit" />
           {this.props.showSignInLink && (
-            <div className="fxa-signin">
-              <span data-l10n-id="onboarding-join-form-signin-label" />
-              <button
-                data-l10n-id="onboarding-join-form-signin"
-                name="user_action"
-                onClick={this.handleSignIn}
-                value="signin"
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+            <p
+              className="fxa-signin"
+              data-l10n-id="onboarding-join-form-signin"
+              onClick={this.handleSignIn}
+              onKeyDown={this.handleSignIn}
+            >
+              <a
+                href={false}
+                tabIndex="0"
+                data-l10n-name="signin"
+                id="signin"
               />
-            </div>
+            </p>
           )}
         </form>
       </div>
